@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Border>
+                <ToggleButton Style="{StaticResource InkToolbarCommonButtonStyle}" Click="Button_Click">
+                    <ToggleButton.Content>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+            </Border>
+            <TextBlock FontSize="24">  Life is Photo</TextBlock>
+        </StackPanel>
+        <SplitView x:Name="Splitter" Grid.Row="1" IsPaneOpen="True" DisplayMode="Inline">
+            <SplitView.Pane>
+                <RelativePanel>
+                    <TextBlock x:Name="SimpleTitle">Sample Title Here</TextBlock>
+                    <ListBox x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged"
+                             AutomationProperties.Name="Scenarios"
+                             SelectionMode="Single" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0"
+                             VerticalAlignment="Top" RelativePanel.Below="SimpleTitle" RelativePanel.Above="FooterPanel">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="local:Scenario">
+                                <TextBlock Text="{x:Bind Title}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel x:Name="FooterPanel" RelativePanel.AlignBottomWithPanel="True">
+                        <Image></Image>
+                        <TextBlock Text="&#xA9; AAbramov. All rights reserved."/>
+                        <StackPanel x:Name="LinkPanel" Orientation="Horizontal">
+                            <HyperlinkButton></HyperlinkButton>
+                            <TextBlock></TextBlock>
+                            <HyperlinkButton></HyperlinkButton>
+                        </StackPanel>
+                    </StackPanel>
+                </RelativePanel>
+            </SplitView.Pane>
+            <RelativePanel>
+                <Frame x:Name="ScenarioFrame" Margin="5" 
+                       RelativePanel.AlignTopWithPanel="True" RelativePanel.Above="StatusPanel"
+                       RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                <StackPanel x:Name="StatusPanel" RelativePanel.AlignBottomWithPanel="True"
+                            RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+                    <TextBlock x:Name="StatusLabel" Text="Status: "/>
+                    <Border x:Name="StatusBorder">
+                        <ScrollViewer>
+                            <TextBlock x:Name="StatusBlock"></TextBlock>
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+            </RelativePanel>
+        </SplitView>
+
+    </Grid>
+</Page>
